@@ -1,15 +1,25 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h2>Belajar Websocket</h2>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+
+  mounted(){
+    window.Echo.channel('public').listen('Sendhai', (e) => {
+      alert('helo')
+      console.log(e);
+    });
+
+    // to connect the privatechannel
+    window.Echo.private('test-channel.1').listen('PrivateTest', (e) => {
+      console.log('go private');
+      //code for displaying the serve data
+      console.log(e); // the data from the server
+    })
   }
 }
 </script>
